@@ -1,0 +1,110 @@
+# .cursorrules - AI Configuration for the "lawyers" Project
+
+# This file provides essential context to the Cursor AI to ensure generated code
+# aligns with the project's architecture, goals, and coding standards.
+
+## 1. Project Overview & Goals
+
+The project is to build a professional website for Kalanidhi Sanjeeva Kumar, a High Court advocate in Hyderabad, India, with 20 years of experience.
+
+- **Client:** Kalanidhi Sanjeeva Kumar
+- **Contact:** +91 9440217782
+- **Specializations:** Ancestral properties, divorce, property litigations, civil, and criminal matters.
+- **Target Audience:** Non-Resident Indians (NRIs) living abroad who require legal services in India.
+
+### Business Objectives:
+1. **Lead Generation:** Generate qualified leads from NRIs.
+2. **Direct Booking & Payment:** Enable clients to book and pay for initial consultations online.
+3. **Establish Authority:** Serve as a professional online brochure showcasing 20 years of expertise and building trust.
+
+## 2. Target Audience & User Journey
+
+The primary user is an NRI, likely unfamiliar with the Indian legal landscape and operating in a different time zone. The user journey must be seamless, efficient, and build trust at every step.
+
+**Ideal User Journey:**
+1. **Discovery:** User lands on the homepage, which clearly communicates the services offered and the expertise of Kalanidhi Sanjeeva Kumar.
+2. **Exploration:** User navigates to view services, case studies, and blog articles relevant to NRI legal issues.
+3. **Scheduling:** User accesses the booking system, selects their own time zone, and sees available slots in their local time.
+4. **Booking:** User selects a consultation type (30-min audio call or document review), fills out a brief intake form, and proceeds to payment.
+5. **Confirmation:** After successful payment, the user receives an automated confirmation email with the appointment details, a WhatsApp contact for the audio call, and instructions for secure document submission.
+
+## 3. Core Features & Priorities
+
+- **(High) Booking System:**
+  - Allows users to select their local time zone.
+  - Integrates in real-time with a Google Calendar to show availability.
+  - Offers two paid consultation types: "30-Minute Audio Call (WhatsApp)" and "Document Review Service".
+- **(High) Payment Gateway Integration:**
+  - Primary: **Razorpay** for handling Indian and international currencies.
+  - Secondary: **PayPal** as an alternative option for international clients.
+- **(High) Secure Document Submission:**
+  - A secure, encrypted portal or feature for clients to upload initial documents post-booking.
+- **(Medium) Case Studies & Testimonials:**
+  - A dedicated section to feature success stories and testimonials, specifically from past NRI clients.
+- **(Medium) Blog & Articles:**
+  - A content section for articles and blog posts on common legal issues faced by NRIs to establish authority and improve SEO.
+
+## 4. Technical Stack & Architecture
+
+- **Frontend:** Next.js (App Router) with TypeScript
+- **Styling:** Tailwind CSS
+- **Backend:** Node.js with Express.js (or Next.js API Routes where appropriate)
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+- **Deployment:** Vercel
+
+## 5. Design System & UI/UX Guidelines
+
+The website's aesthetic should balance traditional authority with modern efficiency. The design must be clean, professional, and trustworthy.
+
+- **Design Mood:** Professional, Modern, Approachable, Trustworthy, Efficient.
+- **Inspiration:** LegalZoom (for clarity), Apple (for minimalist professionalism).
+- **Layout:** Landing page style on Home, with clear top navigation.
+- **Responsiveness:** The site must be fully responsive and optimized for desktop, tablet, and mobile devices.
+- **Dark Mode:** The UI must support a dark mode theme.
+
+### Color Palette:
+
+- **Primary:** `#1B4F72` (Deep Blue) - Used for headers, footers, primary buttons.
+- **Secondary:** `#2980B9` (Sky Blue) - Used for links, secondary buttons, highlights.
+- **Accent:** `#F39C12` (Amber) - Used for calls-to-action (CTAs), key highlights, and accent elements.
+- **Background:** `#F9F9F9` (Light Gray) / `#121212` (Dark Mode)
+- **Text:** `#2C3E50` (Dark Gray) / `#E0E0E0` (Light Gray for Dark Mode)
+
+### Typography:
+- **Headings:** Merriweather (Serif) - A classic, legible serif that conveys authority.
+- **Body & UI:** Inter (Sans-Serif) - A modern, highly readable sans-serif.
+
+## 6. Development Workflow & Standards
+
+- **AI Interaction:** When generating code, always refer to this document for context. Prefix prompts with the relevant section number.
+- **Changelog:** All significant AI-generated changes must be logged in `changelog.md`.
+- **Code Quality:**
+  - Code must be clean, well-commented, and self-documenting where possible.
+  - Strictly follow TypeScript types. Avoid `any` unless absolutely necessary and justified.
+  - All environment variables must be managed in a `.env.local` file and documented in `.env.example`.
+- **Error Handling:** Implement robust error handling on both the client and server sides. API responses should use standard HTTP status codes.
+
+## 7. File & Component Naming Conventions
+
+- **Components:** PascalCase (`BookingCalendar.tsx`, `PrimaryButton.tsx`). Place in `/components/ui` for general UI elements and `/components/sections` for larger page sections.
+- **Pages/Routes:** kebab-case for file-based routing (`/booking`, `/case-studies`). Next.js App Router convention (`/app/booking/page.tsx`).
+- **API Routes:** kebab-case (`/api/create-booking.ts`).
+- **Hooks:** Use `use` prefix (`useAvailability.ts`).
+- **Types:** Place custom types in a `/types/index.ts` file or co-locate with the component if specific. Name with PascalCase (e.g., `BookingData`).
+
+## 8. Coding Standards
+
+- **Language:** Always use TypeScript. Provide types for all function parameters and return values.
+- **File Naming:**
+  - Components: `PascalCase.tsx` (e.g., `BookingForm.tsx`).
+  - API Routes: Use folder-based routing, e.g., `app/api/booking/route.ts`.
+- **Component Structure:**
+  - Use functional components with React Hooks.
+  - Keep components small and focused on a single responsibility.
+  - Use Server Components by default. Only add the `"use client";` directive when client-side interactivity is necessary.
+- **Theming:**
+  - Colors: Use theme colors defined in `tailwind.config.ts`. Example: `bg-brand-primary`, `text-accent`. Do not use arbitrary values like `bg-[#1B4F72]`.
+- **Error Handling:** Wrap async operations in try/catch blocks. Return structured JSON responses from API routes: `{ success: boolean, data: any }` or `{ success: false, error: string }`.
+- **Comments:** Add JSDoc comments to complex functions, utility functions, and API endpoints.
+

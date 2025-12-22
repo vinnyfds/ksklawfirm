@@ -1,0 +1,151 @@
+{
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "caseStudies": "Case Studies",
+      "testimonials": "Testimonials",
+      "blog": "Blog",
+      "gallery": "Gallery",
+      "bookConsultation": "Book a Consultation"
+    },
+    "hero": {
+      "title": "Expert Legal Services for NRIs in Hyderabad",
+      "subtitle": "Kalanidhi Sanjeeva Kumar - High Court Advocate with 20 years of experience specializing in ancestral properties, divorce, property litigations, and civil/criminal matters for Non-Resident Indians.",
+      "bookButton": "Book a Consultation",
+      "viewServices": "View Services"
+    },
+    "footer": {
+      "services": "Services",
+      "quickLinks": "Quick Links",
+      "legal": "Legal",
+      "contact": "Contact",
+      "about": "About",
+      "caseStudies": "Case Studies",
+      "blog": "Blog",
+      "gallery": "Gallery",
+      "ancestralProperties": "Ancestral Properties",
+      "divorce": "Divorce",
+      "propertyLitigation": "Property Litigation",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "highCourtAdvocate": "High Court Advocate",
+      "rightsReserved": "Advocate Kalanidhi Sanjeeva Kumar. All Rights Reserved."
+    },
+    "common": {
+      "readyToGetStarted": "Ready to Get Started?",
+      "bookConsultationToday": "Book your consultation today and get expert legal guidance tailored to your unique situation as an NRI.",
+      "scheduleConsultation": "Schedule Your Consultation",
+      "skipToContent": "Skip to main content",
+      "bookConsultation": "Book a Consultation",
+      "viewServices": "View Services",
+      "learnMore": "Learn More"
+    },
+    "about": {
+      "title": "About Kalanidhi Sanjeeva Kumar",
+      "bioTitle": "High Court Advocate",
+      "bioParagraph1": "Kalanidhi Sanjeeva Kumar is a distinguished High Court advocate based in Hyderabad, Telangana, with over 20 years of extensive experience in the legal profession. Throughout his career, he has specialized in providing expert legal services to Non-Resident Indians (NRIs) who require representation and guidance in Indian legal matters.",
+      "bioParagraph2": "His practice areas include ancestral property disputes, divorce and family law, property litigations, and civil and criminal matters. Mr. Kumar is known for his deep understanding of the unique challenges faced by NRIs navigating the Indian legal system from abroad.",
+      "missionTitle": "Mission & Philosophy",
+      "missionParagraph1": "My mission is to provide accessible, reliable, and professional legal services to Non-Resident Indians who face unique challenges when dealing with legal matters in India. I understand that being physically distant from your legal issues can be stressful and overwhelming.",
+      "missionParagraph2": "I believe in transparent communication, efficient processes, and leveraging modern technology to bridge the gap between NRIs and the Indian legal system. Every client deserves expert representation, clear guidance, and peace of mind, regardless of where they are located in the world.",
+      "qualificationsTitle": "Qualifications & Bar Admissions",
+      "qualification1": "High Court Advocate, Hyderabad, Telangana",
+      "qualification2": "20+ Years of Legal Practice",
+      "qualification3": "Specialization in NRI Legal Matters",
+      "qualification4": "Expert in Ancestral Property, Divorce, and Property Litigation",
+      "experienceTitle": "Experience Highlights",
+      "experience1Title": "NRI Specialization",
+      "experience1Description": "Extensive experience representing NRIs from USA, UK, UAE, Australia, and other countries in various legal matters.",
+      "experience2Title": "Property Expertise",
+      "experience2Description": "Successfully handled numerous ancestral property disputes and property litigations for NRI clients.",
+      "experience3Title": "Family Law",
+      "experience3Description": "Expert guidance in divorce proceedings, including mutual consent divorces for NRI couples.",
+      "experience4Title": "Modern Approach",
+      "experience4Description": "Leveraging technology to provide seamless consultation booking and secure document handling for international clients.",
+      "ctaTitle": "Let's Work Together",
+      "ctaDescription": "Whether you need guidance on an ancestral property matter, divorce proceedings, or any other legal issue, I'm here to help."
+    },
+    "services": {
+      "pageTitle": "Legal Services for NRIs",
+      "pageDescription": "Comprehensive legal services tailored specifically for Non-Resident Indians seeking expert representation in India.",
+      "sectionTitle": "Services Offered",
+      "sectionDescription": "Comprehensive legal services tailored for Non-Resident Indians seeking expert representation in India.",
+      "ancestralProperties": {
+        "title": "Ancestral Properties",
+        "description": "Expert legal guidance for NRIs dealing with ancestral property disputes, inheritance matters, and property rights in India.",
+        "shortDescription": "Expert guidance on ancestral property disputes and inheritance matters for NRIs."
+      },
+      "divorce": {
+        "title": "Divorce",
+        "description": "Comprehensive legal support for divorce proceedings, including mutual consent divorces, for NRI couples.",
+        "shortDescription": "Comprehensive legal support for divorce proceedings and family law matters."
+      },
+      "propertyLitigation": {
+        "title": "Property Litigation",
+        "description": "Strong representation in property disputes, real estate litigation, and land-related legal matters.",
+        "shortDescription": "Strong representation in property disputes and real estate litigation."
+      },
+      "civilMatters": {
+        "title": "Civil Matters",
+        "description": "Experienced handling of various civil cases including contract disputes, recovery matters, and civil suits.",
+        "shortDescription": "Experienced handling of civil and criminal matters in High Court."
+      },
+      "criminalMatters": {
+        "title": "Criminal Matters",
+        "description": "Expert defense and representation in criminal cases, ensuring your rights are protected throughout the legal process.",
+        "shortDescription": "Experienced handling of civil and criminal matters in High Court."
+      },
+      "needAssistanceTitle": "Need Legal Assistance?",
+      "needAssistanceDescription": "Book a consultation to discuss your specific legal matter and get expert guidance tailored to your situation.",
+      "viewAllServices": "View All Services"
+    },
+    "credibility": {
+      "yearsOfExperience": "Years of Experience",
+      "highCourtAdvocate": "High Court Advocate",
+      "nriSpecialization": "NRI Specialization"
+    },
+    "testimonials": {
+      "sectionTitle": "Client Testimonials",
+      "sectionDescription": "Trusted by Non-Resident Indians worldwide for reliable, professional legal services.",
+      "readMore": "Read More Testimonials",
+      "pageTitle": "Client Testimonials",
+      "pageDescription": "Read what our clients have to say about their experience working with us.",
+      "loading": "Loading testimonials...",
+      "error": "Failed to load testimonials",
+      "noTestimonials": "No testimonials available at this time."
+    },
+    "articles": {
+      "sectionTitle": "Recent Articles",
+      "sectionDescription": "Stay informed with expert insights on legal matters relevant to NRIs.",
+      "readMore": "Read More",
+      "viewAll": "View All Articles",
+      "pageTitle": "Legal Blog",
+      "pageDescription": "Expert insights and guidance on legal matters relevant to Non-Resident Indians.",
+      "allCategories": "All Categories",
+      "noPostsFound": "No blog posts found in this category.",
+      "readMoreLabel": "Read More",
+      "minRead": "min read"
+    },
+    "caseStudies": {
+      "pageTitle": "Case Studies",
+      "pageDescription": "Real success stories from our NRI clients who have trusted us with their legal matters.",
+      "allCategories": "All Categories",
+      "noCaseStudiesFound": "No case studies found in this category.",
+      "outcomeLabel": "Outcome:",
+      "readCaseStudy": "Read Case Study",
+      "outcome": "Outcome"
+    },
+    "articles": {
+      "sectionTitle": "Recent Articles",
+      "sectionDescription": "Stay informed with expert insights on legal matters relevant to NRIs.",
+      "readMore": "Read More",
+      "viewAll": "View All Articles",
+      "pageTitle": "Legal Blog",
+      "pageDescription": "Expert insights and guidance on legal matters relevant to Non-Resident Indians.",
+      "allCategories": "All Categories",
+      "noPostsFound": "No blog posts found in this category.",
+      "readMoreLabel": "Read More",
+      "minRead": "min read"
+    }
+}

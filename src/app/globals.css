@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700&display=swap');
+
+@layer base {
+  :root {
+    --background: 249 249 249;
+    --foreground: 44 62 80;
+  }
+
+  .dark {
+    --background: 13 17 23;
+    --foreground: 226 232 240;
+  }
+
+  body {
+    @apply bg-surface-bg text-text-primary dark:bg-dark-surface-bg dark:text-dark-text-primary;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* LanguageSwitcher button color override */
+  .group button.w-full.text-white {
+    color: rgba(255, 255, 255, 1);
+  }
+  
+  .group button.w-full.hover\:text-white:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+

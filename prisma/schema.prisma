@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // For Supabase: Using direct connection URL (port 5432)
+}
+
+// ----------------------------------------
+// ENUMS
+// ----------------------------------------
+
+enum BookingStatus {
+  PENDING    // Initial status when booking is created but not yet paid
+  CONFIRMED  // Payment successful, booking is confirmed
+  COMPLETED  // Consultation has occurred
+  CANCELLED  // Booking was cancelled by user or admin
+}
+
+enum PaymentStatus {
+  PENDING   // Payment initiated but not completed
+  SUCCESS   // Payment successfully processed
+  FAILED    // Payment failed
+}
+
+enum PaymentGateway {
+  RAZORPAY
+  PAYPAL
+}
+
+enum ConsultationCategory {
+  AUDIO_CALL
+  DOCUMENT_REVIEW
+}
+
+enum ContentType {
+  BLOG_POST
+  CASE_STUDY
+  TESTIMONIAL
+}
+
+// ----------------------------------------
+// MODELS
+// ----------------------------------------
+
+/// Represents a client, typically an NRI, who signs up to book a consultation.
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  phone     String?   // To be used for WhatsApp communication
+  timezone  String    // e.g., "America/New_York", crucial for scheduling
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  bookings  Booking[]
+  documents Document[]
+
+  @@map("users")
+}
+
+/// Defines the types of consultations offered, e.g., 30-min call.
+model ConsultationType {
+  id              String               @id @default(cuid())
+  type            ConsultationCategory @unique // Ensures only one entry per category
+  name            String               // e.g., "30-Minute Audio Consultation"
+  description     String
+  durationMinutes Int                  // e.g., 30
+  price           Decimal              // Price in a base currency (e.g., INR)
+  currency        String               @default("INR")
+
+  bookings Booking[]
+
+  @@map("consultation_types")
+}
+
+/// Represents a scheduled appointment between a user and the advocate.
+model Booking {
+  id                 String         @id @default(cuid())
+  startTime          DateTime       // The scheduled start time in UTC
+  endTime            DateTime       // The scheduled end time in UTC
+  status             BookingStatus  @default(PENDING)
+  clientNotes        String?        // Brief details about the legal matter from the intake form
+  googleCalendarEventId String?     // ID of the event in Google Calendar for sync
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  user               User             @relation(fields: [userId], references: [id])
+  userId             String
+  consultationType   ConsultationType @relation(fields: [consultationTypeId], references: [id])
+  consultationTypeId String
+
+  payment            Payment?         // One-to-one relation with Payment
+  documents          Document[]       // Documents associated with this booking
+
+  @@map("bookings")
+}
+
+/// Stores details of a payment transaction for a booking.
+model Payment {
+  id               String         @id @default(cuid())
+  amount           Decimal        // The amount paid
+  currency         String         // The currency of the transaction (e.g., "USD", "INR")
+  status           PaymentStatus  @default(PENDING)
+  gateway          PaymentGateway // Razorpay or PayPal
+  gatewayPaymentId String         // The transaction ID from the payment gateway
+  gatewayOrderId   String?        // The order ID from the payment gateway (useful for Razorpay)
+  paymentDetails   Json?          // Raw response from the gateway for auditing
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  booking   Booking @relation(fields: [bookingId], references: [id])
+  bookingId String  @unique // Enforces a one-to-one relationship
+
+  @@map("payments")
+}
+
+/// Represents a document securely uploaded by a user.
+model Document {
+  id         String   @id @default(cuid())
+  fileName   String   // Original name of the file
+  fileUrl    String   // Secure, signed URL pointing to the file in cloud storage (e.g., S3)
+  fileType   String   // MIME type, e.g., "application/pdf"
+  fileSize   Int      // Size in bytes
+  uploadedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+  bookingId String?  // A document can be optionally linked to a booking
+
+  @@map("documents")
+}
+
+/// A generic model for storing content like blog posts, case studies, and testimonials.
+model Content {
+  id             String      @id @default(cuid())
+  type           ContentType
+  title          String
+  slug           String      @unique // URL-friendly identifier
+  content        String      @db.Text // Can store Markdown or HTML
+  authorName     String?     // For Blog Posts/Case Studies, e.g., "Kalanidhi Sanjeeva Kumar"
+  clientLocation String?     // For Testimonials, e.g., "USA", "UK"
+  isPublished    Boolean     @default(false)
+  publishedAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("content")
+}
+
