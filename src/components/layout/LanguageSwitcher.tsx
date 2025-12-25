@@ -56,7 +56,7 @@ export default function LanguageSwitcher() {
 
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index?: number) => {
-    if (!isOpen && e.key === 'Enter' && e.key === ' ') {
+    if (!isOpen && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
       setIsOpen(true);
       return;
