@@ -6,6 +6,7 @@ import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
 import { generateLegalServiceSchema } from '@/lib/schema';
 import { SchemaScript } from '@/components/seo/SchemaScript';
 import { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,12 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CivilMattersPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('services.civilMatters');
+  const tServices = await getTranslations('services');
   const baseUrl = getBaseUrl();
 
   const schema = generateLegalServiceSchema({
-    name: 'Civil Matters Legal Services',
-    description:
-      'Experienced handling of various civil cases including contract disputes, recovery matters, and civil suits for NRIs.',
+    name: t('pageTitle'),
+    description: t('description'),
     serviceType: 'Legal Service',
     areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
     provider: {
@@ -43,9 +46,9 @@ export default async function CivilMattersPage({ params }: Props) {
     },
   });
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Civil Matters', href: '/services/civil-matters' },
+    { label: tServices('breadcrumbs.home'), href: '/' },
+    { label: tServices('breadcrumbs.services'), href: '/services' },
+    { label: t('title'), href: '/services/civil-matters' },
   ];
 
   return (
@@ -55,11 +58,10 @@ export default async function CivilMattersPage({ params }: Props) {
         <div className="max-w-4xl mx-auto">
           <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
-          Civil Matters Legal Services
+          {t('pageTitle')}
         </h1>
         <p className="text-body-lg text-text-secondary dark:text-dark-text-secondary mb-8">
-          Experienced handling of various civil cases including contract disputes, recovery matters,
-          and civil suits for NRIs.
+          {t('description')}
         </p>
 
         {/* For NRIs Section */}
@@ -67,17 +69,17 @@ export default async function CivilMattersPage({ params }: Props) {
           <Card className="bg-brand-primary/5 dark:bg-brand-primary/10">
             <CardContent className="p-8">
               <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-                For Non-Resident Indians
+                {t('forNriTitle')}
               </h2>
               <p className="text-body-md text-text-secondary dark:text-dark-text-secondary mb-4">
-                NRIs often face civil legal challenges:
+                {t('forNriDescription')}
               </p>
               <ul className="space-y-2 text-body-md text-text-secondary dark:text-dark-text-secondary list-disc list-inside">
-                <li>Contract disputes with Indian parties</li>
-                <li>Recovery of debts and financial matters</li>
-                <li>Business and commercial disputes</li>
-                <li>Consumer protection cases</li>
-                <li>Administrative and regulatory matters</li>
+                <li>{t('forNriPoints.point1')}</li>
+                <li>{t('forNriPoints.point2')}</li>
+                <li>{t('forNriPoints.point3')}</li>
+                <li>{t('forNriPoints.point4')}</li>
+                <li>{t('forNriPoints.point5')}</li>
               </ul>
             </CardContent>
           </Card>
@@ -85,49 +87,45 @@ export default async function CivilMattersPage({ params }: Props) {
 
         {/* Process Overview */}
         <section className="mb-12">
-          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">Our Process</h2>
+          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">{t('processTitle')}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Case Analysis
+                  {t('processSteps.step1Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We analyze your civil matter, review all relevant documents and contracts, and
-                  assess the legal merits of your case.
+                  {t('processSteps.step1Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Strategy Development
+                  {t('processSteps.step2Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We develop a comprehensive legal strategy tailored to your specific situation,
-                  whether it involves negotiation, mediation, or litigation.
+                  {t('processSteps.step2Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Legal Representation
+                  {t('processSteps.step3Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We represent you in all legal proceedings, negotiations, and court appearances,
-                  ensuring your interests are protected.
+                  {t('processSteps.step3Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Resolution & Follow-up
+                  {t('processSteps.step4Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We work towards favorable resolution and ensure proper execution of judgments or
-                  settlements, keeping you informed throughout.
+                  {t('processSteps.step4Description')}
                 </p>
               </CardContent>
             </Card>
@@ -137,39 +135,36 @@ export default async function CivilMattersPage({ params }: Props) {
         {/* FAQ Section */}
         <section className="mb-12">
           <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-            Frequently Asked Questions
+            {t('faqTitle')}
           </h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  What types of civil matters do you handle?
+                  {t('faqs.q1')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We handle various civil matters including contract disputes, recovery suits,
-                  specific performance cases, injunctions, and other civil litigation matters.
+                  {t('faqs.a1')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Can civil disputes be resolved without going to court?
+                  {t('faqs.q2')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Yes, many civil disputes can be resolved through negotiation, mediation, or
-                  settlement. We explore all options before proceeding to litigation.
+                  {t('faqs.a2')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  How do you handle recovery matters for NRIs?
+                  {t('faqs.q3')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We file appropriate recovery suits, obtain necessary orders, and work towards
-                  execution of decrees, handling all local requirements on your behalf.
+                  {t('faqs.a3')}
                 </p>
               </CardContent>
             </Card>
@@ -178,12 +173,12 @@ export default async function CivilMattersPage({ params }: Props) {
 
         {/* CTA */}
         <section className="text-center bg-brand-primary text-white p-8 rounded-lg">
-          <h2 className="text-h2 font-serif font-bold mb-4">Need Civil Legal Assistance?</h2>
+          <h2 className="text-h2 font-serif font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-body-md mb-6 max-w-2xl mx-auto">
-            Book a consultation to discuss your civil matter and explore your legal options.
+            {t('ctaDescription')}
           </p>
           <Button asChild size="lg" variant="default">
-            <Link href="/booking">Book a Consultation</Link>
+            <Link href="/booking">{t('ctaButton')}</Link>
           </Button>
         </section>
         </div>

@@ -6,6 +6,7 @@ import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
 import { generateLegalServiceSchema } from '@/lib/schema';
 import { SchemaScript } from '@/components/seo/SchemaScript';
 import { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,12 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function AncestralPropertiesPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('services.ancestralProperties');
+  const tNav = await getTranslations('nav');
+  const tCommon = await getTranslations('common');
+  const tServices = await getTranslations('services');
   const baseUrl = getBaseUrl();
 
   const schema = generateLegalServiceSchema({
-    name: 'Ancestral Properties Legal Services',
-    description:
-      'Expert legal guidance for NRIs dealing with ancestral property disputes, inheritance matters, and property rights in India.',
+    name: t('pageTitle'),
+    description: t('description'),
     serviceType: 'Legal Service',
     areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
     provider: {
@@ -43,9 +48,9 @@ export default async function AncestralPropertiesPage({ params }: Props) {
     },
   });
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Ancestral Properties', href: '/services/ancestral-properties' },
+    { label: tServices('breadcrumbs.home'), href: '/' },
+    { label: tServices('breadcrumbs.services'), href: '/services' },
+    { label: t('title'), href: '/services/ancestral-properties' },
   ];
 
   return (
@@ -55,11 +60,10 @@ export default async function AncestralPropertiesPage({ params }: Props) {
         <div className="max-w-4xl mx-auto">
           <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
-          Ancestral Properties Legal Services
+          {t('pageTitle')}
         </h1>
         <p className="text-body-lg text-text-secondary dark:text-dark-text-secondary mb-8">
-          Expert legal guidance for NRIs dealing with ancestral property disputes, inheritance
-          matters, and property rights in India.
+          {t('description')}
         </p>
 
         {/* For NRIs Section */}
@@ -67,18 +71,17 @@ export default async function AncestralPropertiesPage({ params }: Props) {
           <Card className="bg-brand-primary/5 dark:bg-brand-primary/10">
             <CardContent className="p-8">
               <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-                For Non-Resident Indians
+                {t('forNriTitle')}
               </h2>
               <p className="text-body-md text-text-secondary dark:text-dark-text-secondary mb-4">
-                As an NRI, managing ancestral property matters from abroad presents unique
-                challenges:
+                {t('forNriDescription')}
               </p>
               <ul className="space-y-2 text-body-md text-text-secondary dark:text-dark-text-secondary list-disc list-inside">
-                <li>Difficulty in physically being present for property inspections and legal proceedings</li>
-                <li>Complex inheritance laws and succession rules in India</li>
-                <li>Time zone differences affecting communication and coordination</li>
-                <li>Understanding local property laws and regulations</li>
-                <li>Protecting your rights and interests from a distance</li>
+                <li>{t('forNriPoints.point1')}</li>
+                <li>{t('forNriPoints.point2')}</li>
+                <li>{t('forNriPoints.point3')}</li>
+                <li>{t('forNriPoints.point4')}</li>
+                <li>{t('forNriPoints.point5')}</li>
               </ul>
             </CardContent>
           </Card>
@@ -86,50 +89,45 @@ export default async function AncestralPropertiesPage({ params }: Props) {
 
         {/* Process Overview */}
         <section className="mb-12">
-          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">Our Process</h2>
+          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">{t('processTitle')}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Initial Consultation
+                  {t('processSteps.step1Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We start with a comprehensive consultation to understand your specific situation,
-                  property details, and legal concerns. This can be done via audio call or document
-                  review.
+                  {t('processSteps.step1Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Document Review & Analysis
+                  {t('processSteps.step2Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We review all relevant property documents, inheritance papers, and legal records
-                  to assess your case and identify potential issues or opportunities.
+                  {t('processSteps.step2Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Legal Strategy
+                  {t('processSteps.step3Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Based on our analysis, we develop a tailored legal strategy to protect your
-                  interests and achieve your objectives, keeping you informed every step of the way.
+                  {t('processSteps.step3Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Representation & Follow-up
+                  {t('processSteps.step4Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We represent your interests in all legal proceedings, handle documentation, and
-                  provide regular updates via email and scheduled calls.
+                  {t('processSteps.step4Description')}
                 </p>
               </CardContent>
             </Card>
@@ -139,42 +137,36 @@ export default async function AncestralPropertiesPage({ params }: Props) {
         {/* FAQ Section */}
         <section className="mb-12">
           <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-            Frequently Asked Questions
+            {t('faqTitle')}
           </h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Can I handle ancestral property matters from abroad?
+                  {t('faqs.q1')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Yes, with proper legal representation and documentation, you can effectively manage
-                  ancestral property matters from abroad. We handle all local requirements while
-                  keeping you informed.
+                  {t('faqs.a1')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  What documents do I need?
+                  {t('faqs.q2')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Typically, you'll need property deeds, inheritance documents, family tree
-                  information, and any existing legal agreements. We'll provide a complete checklist
-                  during consultation.
+                  {t('faqs.a2')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  How long do property disputes typically take?
+                  {t('faqs.q3')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  The duration varies based on the complexity of the case. Simple matters may
-                  resolve in a few months, while complex disputes can take 1-2 years. We'll provide
-                  realistic timelines during consultation.
+                  {t('faqs.a3')}
                 </p>
               </CardContent>
             </Card>
@@ -183,12 +175,12 @@ export default async function AncestralPropertiesPage({ params }: Props) {
 
         {/* CTA */}
         <section className="text-center bg-brand-primary text-white p-8 rounded-lg">
-          <h2 className="text-h2 font-serif font-bold mb-4">Ready to Get Started?</h2>
+          <h2 className="text-h2 font-serif font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-body-md mb-6 max-w-2xl mx-auto">
-            Book a consultation to discuss your ancestral property matter and get expert guidance.
+            {t('ctaDescription')}
           </p>
           <Button asChild size="lg" variant="default">
-            <Link href="/booking">Book a Consultation</Link>
+            <Link href="/booking">{t('ctaButton')}</Link>
           </Button>
         </section>
         </div>

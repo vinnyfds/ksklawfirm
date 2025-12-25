@@ -6,6 +6,7 @@ import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
 import { generateLegalServiceSchema } from '@/lib/schema';
 import { SchemaScript } from '@/components/seo/SchemaScript';
 import { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,12 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CriminalMattersPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('services.criminalMatters');
+  const tServices = await getTranslations('services');
   const baseUrl = getBaseUrl();
 
   const schema = generateLegalServiceSchema({
-    name: 'Criminal Matters Legal Services',
-    description:
-      'Expert defense and representation in criminal cases, ensuring your rights are protected throughout the legal process.',
+    name: t('pageTitle'),
+    description: t('description'),
     serviceType: 'Legal Service',
     areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
     provider: {
@@ -43,9 +46,9 @@ export default async function CriminalMattersPage({ params }: Props) {
     },
   });
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Criminal Matters', href: '/services/criminal-matters' },
+    { label: tServices('breadcrumbs.home'), href: '/' },
+    { label: tServices('breadcrumbs.services'), href: '/services' },
+    { label: t('title'), href: '/services/criminal-matters' },
   ];
 
   return (
@@ -55,11 +58,10 @@ export default async function CriminalMattersPage({ params }: Props) {
         <div className="max-w-4xl mx-auto">
           <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
-          Criminal Matters Legal Services
+          {t('pageTitle')}
         </h1>
         <p className="text-body-lg text-text-secondary dark:text-dark-text-secondary mb-8">
-          Expert defense and representation in criminal cases, ensuring your rights are protected
-          throughout the legal process.
+          {t('description')}
         </p>
 
         {/* For NRIs Section */}
@@ -67,17 +69,17 @@ export default async function CriminalMattersPage({ params }: Props) {
           <Card className="bg-brand-primary/5 dark:bg-brand-primary/10">
             <CardContent className="p-8">
               <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-                For Non-Resident Indians
+                {t('forNriTitle')}
               </h2>
               <p className="text-body-md text-text-secondary dark:text-dark-text-secondary mb-4">
-                Criminal matters for NRIs require specialized attention:
+                {t('forNriDescription')}
               </p>
               <ul className="space-y-2 text-body-md text-text-secondary dark:text-dark-text-secondary list-disc list-inside">
-                <li>Understanding Indian criminal law and procedures</li>
-                <li>Managing cases while living abroad</li>
-                <li>Ensuring proper legal representation in court</li>
-                <li>Protecting your rights and interests</li>
-                <li>Coordinating with law enforcement and courts</li>
+                <li>{t('forNriPoints.point1')}</li>
+                <li>{t('forNriPoints.point2')}</li>
+                <li>{t('forNriPoints.point3')}</li>
+                <li>{t('forNriPoints.point4')}</li>
+                <li>{t('forNriPoints.point5')}</li>
               </ul>
             </CardContent>
           </Card>
@@ -85,49 +87,45 @@ export default async function CriminalMattersPage({ params }: Props) {
 
         {/* Process Overview */}
         <section className="mb-12">
-          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">Our Process</h2>
+          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">{t('processTitle')}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Case Assessment
+                  {t('processSteps.step1Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We thoroughly assess your criminal case, review all charges and evidence, and
-                  develop a strong defense strategy.
+                  {t('processSteps.step1Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Legal Defense
+                  {t('processSteps.step2Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We prepare and present a robust defense, file necessary applications, and ensure
-                  all legal procedures are followed correctly.
+                  {t('processSteps.step2Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Court Representation
+                  {t('processSteps.step3Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We represent you in all court proceedings, hearings, and bail applications,
-                  ensuring your rights are protected at every stage.
+                  {t('processSteps.step3Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Regular Communication
+                  {t('processSteps.step4Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We maintain regular communication, providing updates on case progress and
-                  advising on all legal developments.
+                  {t('processSteps.step4Description')}
                 </p>
               </CardContent>
             </Card>
@@ -137,41 +135,36 @@ export default async function CriminalMattersPage({ params }: Props) {
         {/* FAQ Section */}
         <section className="mb-12">
           <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-            Frequently Asked Questions
+            {t('faqTitle')}
           </h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  What types of criminal cases do you handle?
+                  {t('faqs.q1')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We handle various criminal matters including fraud, financial crimes, property
-                  offenses, and other criminal cases. We provide strong defense representation in all
-                  matters.
+                  {t('faqs.a1')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Do I need to be present in India for criminal proceedings?
+                  {t('faqs.q2')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Criminal cases often require your presence, especially for hearings and court
-                  appearances. However, we can handle many procedural matters on your behalf and
-                  minimize required travel.
+                  {t('faqs.a2')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  How do you handle bail applications?
+                  {t('faqs.q3')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We prepare and file bail applications, present strong arguments, and work to
-                  secure bail when appropriate, ensuring all legal requirements are met.
+                  {t('faqs.a3')}
                 </p>
               </CardContent>
             </Card>
@@ -180,12 +173,12 @@ export default async function CriminalMattersPage({ params }: Props) {
 
         {/* CTA */}
         <section className="text-center bg-brand-primary text-white p-8 rounded-lg">
-          <h2 className="text-h2 font-serif font-bold mb-4">Need Criminal Defense?</h2>
+          <h2 className="text-h2 font-serif font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-body-md mb-6 max-w-2xl mx-auto">
-            Get expert legal representation to protect your rights and interests.
+            {t('ctaDescription')}
           </p>
           <Button asChild size="lg" variant="default">
-            <Link href="/booking">Book a Consultation</Link>
+            <Link href="/booking">{t('ctaButton')}</Link>
           </Button>
         </section>
         </div>

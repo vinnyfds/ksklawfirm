@@ -25,5 +25,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CaseStudiesPage({ params }: Props) {
   const { locale } = await params;
-  return <CaseStudiesPageClient locale={locale} />;
+  return <CaseStudiesPageClient key={locale} locale={locale} />;
 }

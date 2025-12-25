@@ -6,6 +6,7 @@ import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
 import { generateLegalServiceSchema } from '@/lib/schema';
 import { SchemaScript } from '@/components/seo/SchemaScript';
 import { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,12 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DivorcePage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('services.divorce');
+  const tServices = await getTranslations('services');
   const baseUrl = getBaseUrl();
 
   const schema = generateLegalServiceSchema({
-    name: 'Divorce Legal Services',
-    description:
-      'Comprehensive legal support for divorce proceedings, including mutual consent divorces, for NRI couples.',
+    name: t('pageTitle'),
+    description: t('description'),
     serviceType: 'Legal Service',
     areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
     provider: {
@@ -43,9 +46,9 @@ export default async function DivorcePage({ params }: Props) {
     },
   });
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Divorce', href: '/services/divorce' },
+    { label: tServices('breadcrumbs.home'), href: '/' },
+    { label: tServices('breadcrumbs.services'), href: '/services' },
+    { label: t('title'), href: '/services/divorce' },
   ];
 
   return (
@@ -55,11 +58,10 @@ export default async function DivorcePage({ params }: Props) {
         <div className="max-w-4xl mx-auto">
           <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
-          Divorce Legal Services for NRIs
+          {t('pageTitle')}
         </h1>
         <p className="text-body-lg text-text-secondary dark:text-dark-text-secondary mb-8">
-          Comprehensive legal support for divorce proceedings, including mutual consent divorces, for
-          NRI couples.
+          {t('description')}
         </p>
 
         {/* For NRIs Section */}
@@ -67,17 +69,17 @@ export default async function DivorcePage({ params }: Props) {
           <Card className="bg-brand-primary/5 dark:bg-brand-primary/10">
             <CardContent className="p-8">
               <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-                For Non-Resident Indians
+                {t('forNriTitle')}
               </h2>
               <p className="text-body-md text-text-secondary dark:text-dark-text-secondary mb-4">
-                NRI couples facing divorce face unique challenges:
+                {t('forNriDescription')}
               </p>
               <ul className="space-y-2 text-body-md text-text-secondary dark:text-dark-text-secondary list-disc list-inside">
-                <li>Navigating Indian divorce laws while living abroad</li>
-                <li>Understanding mutual consent vs. contested divorce procedures</li>
-                <li>Managing property division and alimony matters across borders</li>
-                <li>Child custody considerations when parents are in different countries</li>
-                <li>Coordination of legal proceedings without frequent travel to India</li>
+                <li>{t('forNriPoints.point1')}</li>
+                <li>{t('forNriPoints.point2')}</li>
+                <li>{t('forNriPoints.point3')}</li>
+                <li>{t('forNriPoints.point4')}</li>
+                <li>{t('forNriPoints.point5')}</li>
               </ul>
             </CardContent>
           </Card>
@@ -85,49 +87,45 @@ export default async function DivorcePage({ params }: Props) {
 
         {/* Process Overview */}
         <section className="mb-12">
-          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">Our Process</h2>
+          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">{t('processTitle')}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Initial Assessment
+                  {t('processSteps.step1Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We assess your situation to determine if mutual consent divorce is possible or if
-                  a contested divorce is necessary, explaining all options clearly.
+                  {t('processSteps.step1Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Documentation & Filing
+                  {t('processSteps.step2Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We handle all necessary documentation, including marriage certificates, settlement
-                  agreements, and court filings, minimizing your need to travel.
+                  {t('processSteps.step2Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Negotiation & Settlement
+                  {t('processSteps.step3Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We negotiate on your behalf for fair settlement terms regarding property
-                  division, alimony, and child custody, keeping you informed throughout.
+                  {t('processSteps.step3Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Court Representation
+                  {t('processSteps.step4Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We represent you in all court proceedings, ensuring your interests are protected
-                  and the process moves forward efficiently.
+                  {t('processSteps.step4Description')}
                 </p>
               </CardContent>
             </Card>
@@ -137,40 +135,36 @@ export default async function DivorcePage({ params }: Props) {
         {/* FAQ Section */}
         <section className="mb-12">
           <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-            Frequently Asked Questions
+            {t('faqTitle')}
           </h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Can I get a divorce in India if I'm living abroad?
+                  {t('faqs.q1')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Yes, if you were married in India or under Indian law, you can file for divorce in
-                  India. We can handle most of the process remotely, with minimal travel required.
+                  {t('faqs.a1')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  What is mutual consent divorce?
+                  {t('faqs.q2')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Mutual consent divorce is when both parties agree to end the marriage. It's
-                  faster (typically 6-18 months) and less contentious than contested divorce. We
-                  help facilitate this process.
+                  {t('faqs.a2')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  How is property divided in NRI divorces?
+                  {t('faqs.q3')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Property division follows Indian law, considering both Indian and foreign assets.
-                  We help negotiate fair settlements that account for all marital property.
+                  {t('faqs.a3')}
                 </p>
               </CardContent>
             </Card>
@@ -179,12 +173,12 @@ export default async function DivorcePage({ params }: Props) {
 
         {/* CTA */}
         <section className="text-center bg-brand-primary text-white p-8 rounded-lg">
-          <h2 className="text-h2 font-serif font-bold mb-4">Need Divorce Legal Assistance?</h2>
+          <h2 className="text-h2 font-serif font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-body-md mb-6 max-w-2xl mx-auto">
-            Book a consultation to discuss your situation and explore your options.
+            {t('ctaDescription')}
           </p>
           <Button asChild size="lg" variant="default">
-            <Link href="/booking">Book a Consultation</Link>
+            <Link href="/booking">{t('ctaButton')}</Link>
           </Button>
         </section>
         </div>

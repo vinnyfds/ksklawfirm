@@ -6,6 +6,7 @@ import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
 import { generateLegalServiceSchema } from '@/lib/schema';
 import { SchemaScript } from '@/components/seo/SchemaScript';
 import { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,12 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PropertyLitigationPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('services.propertyLitigation');
+  const tServices = await getTranslations('services');
   const baseUrl = getBaseUrl();
 
   const schema = generateLegalServiceSchema({
-    name: 'Property Litigation Services',
-    description:
-      'Strong representation in property disputes, real estate litigation, and land-related legal matters for NRIs.',
+    name: t('pageTitle'),
+    description: t('description'),
     serviceType: 'Legal Service',
     areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
     provider: {
@@ -43,9 +46,9 @@ export default async function PropertyLitigationPage({ params }: Props) {
     },
   });
   const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services' },
-    { label: 'Property Litigation', href: '/services/property-litigation' },
+    { label: tServices('breadcrumbs.home'), href: '/' },
+    { label: tServices('breadcrumbs.services'), href: '/services' },
+    { label: t('title'), href: '/services/property-litigation' },
   ];
 
   return (
@@ -55,11 +58,10 @@ export default async function PropertyLitigationPage({ params }: Props) {
         <div className="max-w-4xl mx-auto">
           <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
-          Property Litigation Services
+          {t('pageTitle')}
         </h1>
         <p className="text-body-lg text-text-secondary dark:text-dark-text-secondary mb-8">
-          Strong representation in property disputes, real estate litigation, and land-related
-          legal matters for NRIs.
+          {t('description')}
         </p>
 
         {/* For NRIs Section */}
@@ -67,17 +69,17 @@ export default async function PropertyLitigationPage({ params }: Props) {
           <Card className="bg-brand-primary/5 dark:bg-brand-primary/10">
             <CardContent className="p-8">
               <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-                For Non-Resident Indians
+                {t('forNriTitle')}
               </h2>
               <p className="text-body-md text-text-secondary dark:text-dark-text-secondary mb-4">
-                Property litigation for NRIs involves unique complexities:
+                {t('forNriDescription')}
               </p>
               <ul className="space-y-2 text-body-md text-text-secondary dark:text-dark-text-secondary list-disc list-inside">
-                <li>Protecting property rights from a distance</li>
-                <li>Dealing with encroachments and illegal possession</li>
-                <li>Understanding local property laws and regulations</li>
-                <li>Managing litigation timelines and court appearances</li>
-                <li>Coordinating with local authorities and courts</li>
+                <li>{t('forNriPoints.point1')}</li>
+                <li>{t('forNriPoints.point2')}</li>
+                <li>{t('forNriPoints.point3')}</li>
+                <li>{t('forNriPoints.point4')}</li>
+                <li>{t('forNriPoints.point5')}</li>
               </ul>
             </CardContent>
           </Card>
@@ -85,49 +87,45 @@ export default async function PropertyLitigationPage({ params }: Props) {
 
         {/* Process Overview */}
         <section className="mb-12">
-          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">Our Process</h2>
+          <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">{t('processTitle')}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Case Evaluation
+                  {t('processSteps.step1Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We thoroughly evaluate your property dispute, review all documents, and assess the
-                  strength of your case to determine the best legal strategy.
+                  {t('processSteps.step1Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Legal Documentation
+                  {t('processSteps.step2Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We prepare and file all necessary legal documents, including suits, petitions,
-                  and responses, ensuring compliance with all procedural requirements.
+                  {t('processSteps.step2Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Court Representation
+                  {t('processSteps.step3Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We represent you in all court proceedings, hearings, and negotiations, ensuring
-                  your interests are vigorously defended.
+                  {t('processSteps.step3Description')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Regular Updates
+                  {t('processSteps.step4Title')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We provide regular updates on case progress via email and scheduled calls, keeping
-                  you informed without requiring frequent travel.
+                  {t('processSteps.step4Description')}
                 </p>
               </CardContent>
             </Card>
@@ -137,40 +135,36 @@ export default async function PropertyLitigationPage({ params }: Props) {
         {/* FAQ Section */}
         <section className="mb-12">
           <h2 className="text-h2 font-serif font-bold text-brand-primary mb-4">
-            Frequently Asked Questions
+            {t('faqTitle')}
           </h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  What types of property disputes can you handle?
+                  {t('faqs.q1')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  We handle various property disputes including title disputes, boundary issues,
-                  encroachments, eviction matters, and recovery of possession cases.
+                  {t('faqs.a1')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  Do I need to be present in India for court hearings?
+                  {t('faqs.q2')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  In most cases, we can represent you without your physical presence. However, some
-                  situations may require your appearance, which we'll discuss during consultation.
+                  {t('faqs.a2')}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-h4 font-serif font-bold text-brand-primary mb-2">
-                  How long does property litigation typically take?
+                  {t('faqs.q3')}
                 </h3>
                 <p className="text-body-md text-text-secondary dark:text-dark-text-secondary">
-                  Property litigation duration varies significantly based on case complexity. Simple
-                  matters may resolve in 6-12 months, while complex disputes can take 2-5 years. We
-                  provide realistic timelines during consultation.
+                  {t('faqs.a3')}
                 </p>
               </CardContent>
             </Card>
@@ -179,12 +173,12 @@ export default async function PropertyLitigationPage({ params }: Props) {
 
         {/* CTA */}
         <section className="text-center bg-brand-primary text-white p-8 rounded-lg">
-          <h2 className="text-h2 font-serif font-bold mb-4">Facing a Property Dispute?</h2>
+          <h2 className="text-h2 font-serif font-bold mb-4">{t('ctaTitle')}</h2>
           <p className="text-body-md mb-6 max-w-2xl mx-auto">
-            Get expert legal representation to protect your property rights.
+            {t('ctaDescription')}
           </p>
           <Button asChild size="lg" variant="default">
-            <Link href="/booking">Book a Consultation</Link>
+            <Link href="/booking">{t('ctaButton')}</Link>
           </Button>
         </section>
         </div>

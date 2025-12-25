@@ -74,31 +74,200 @@
       "ancestralProperties": {
         "title": "Ancestral Properties",
         "description": "Expert legal guidance for NRIs dealing with ancestral property disputes, inheritance matters, and property rights in India.",
-        "shortDescription": "Expert guidance on ancestral property disputes and inheritance matters for NRIs."
+        "shortDescription": "Expert guidance on ancestral property disputes and inheritance matters for NRIs.",
+        "pageTitle": "Ancestral Properties Legal Services",
+        "forNriTitle": "For Non-Resident Indians",
+        "forNriDescription": "As an NRI, managing ancestral property matters from abroad presents unique challenges:",
+        "forNriPoints": {
+          "point1": "Difficulty in physically being present for property inspections and legal proceedings",
+          "point2": "Complex inheritance laws and succession rules in India",
+          "point3": "Time zone differences affecting communication and coordination",
+          "point4": "Understanding local property laws and regulations",
+          "point5": "Protecting your rights and interests from a distance"
+        },
+        "processTitle": "Our Process",
+        "processSteps": {
+          "step1Title": "Initial Consultation",
+          "step1Description": "We start with a comprehensive consultation to understand your specific situation, property details, and legal concerns. This can be done via audio call or document review.",
+          "step2Title": "Document Review & Analysis",
+          "step2Description": "We review all relevant property documents, inheritance papers, and legal records to assess your case and identify potential issues or opportunities.",
+          "step3Title": "Legal Strategy",
+          "step3Description": "Based on our analysis, we develop a tailored legal strategy to protect your interests and achieve your objectives, keeping you informed every step of the way.",
+          "step4Title": "Representation & Follow-up",
+          "step4Description": "We represent your interests in all legal proceedings, handle documentation, and provide regular updates via email and scheduled calls."
+        },
+        "faqTitle": "Frequently Asked Questions",
+        "faqs": {
+          "q1": "Can I handle ancestral property matters from abroad?",
+          "a1": "Yes, with proper legal representation and documentation, you can effectively manage ancestral property matters from abroad. We handle all local requirements while keeping you informed.",
+          "q2": "What documents do I need?",
+          "a2": "Typically, you'll need property deeds, inheritance documents, family tree information, and any existing legal agreements. We'll provide a complete checklist during consultation.",
+          "q3": "How long do property disputes typically take?",
+          "a3": "The duration varies based on the complexity of the case. Simple matters may resolve in a few months, while complex disputes can take 1-2 years. We'll provide realistic timelines during consultation."
+        },
+        "ctaTitle": "Ready to Get Started?",
+        "ctaDescription": "Book a consultation to discuss your ancestral property matter and get expert guidance.",
+        "ctaButton": "Book a Consultation"
       },
       "divorce": {
         "title": "Divorce",
         "description": "Comprehensive legal support for divorce proceedings, including mutual consent divorces, for NRI couples.",
-        "shortDescription": "Comprehensive legal support for divorce proceedings and family law matters."
+        "shortDescription": "Comprehensive legal support for divorce proceedings and family law matters.",
+        "pageTitle": "Divorce Legal Services for NRIs",
+        "forNriTitle": "For Non-Resident Indians",
+        "forNriDescription": "NRI couples facing divorce face unique challenges:",
+        "forNriPoints": {
+          "point1": "Navigating Indian divorce laws while living abroad",
+          "point2": "Understanding mutual consent vs. contested divorce procedures",
+          "point3": "Managing property division and alimony matters across borders",
+          "point4": "Child custody considerations when parents are in different countries",
+          "point5": "Coordination of legal proceedings without frequent travel to India"
+        },
+        "processTitle": "Our Process",
+        "processSteps": {
+          "step1Title": "Initial Assessment",
+          "step1Description": "We assess your situation to determine if mutual consent divorce is possible or if a contested divorce is necessary, explaining all options clearly.",
+          "step2Title": "Documentation & Filing",
+          "step2Description": "We handle all necessary documentation, including marriage certificates, settlement agreements, and court filings, minimizing your need to travel.",
+          "step3Title": "Negotiation & Settlement",
+          "step3Description": "We negotiate on your behalf for fair settlement terms regarding property division, alimony, and child custody, keeping you informed throughout.",
+          "step4Title": "Court Representation",
+          "step4Description": "We represent you in all court proceedings, ensuring your interests are protected and the process moves forward efficiently."
+        },
+        "faqTitle": "Frequently Asked Questions",
+        "faqs": {
+          "q1": "Can I get a divorce in India if I'm living abroad?",
+          "a1": "Yes, if you were married in India or under Indian law, you can file for divorce in India. We can handle most of the process remotely, with minimal travel required.",
+          "q2": "What is mutual consent divorce?",
+          "a2": "Mutual consent divorce is when both parties agree to end the marriage. It's faster (typically 6-18 months) and less contentious than contested divorce. We help facilitate this process.",
+          "q3": "How is property divided in NRI divorces?",
+          "a3": "Property division follows Indian law, considering both Indian and foreign assets. We help negotiate fair settlements that account for all marital property."
+        },
+        "ctaTitle": "Need Divorce Legal Assistance?",
+        "ctaDescription": "Book a consultation to discuss your situation and explore your options.",
+        "ctaButton": "Book a Consultation"
       },
       "propertyLitigation": {
         "title": "Property Litigation",
         "description": "Strong representation in property disputes, real estate litigation, and land-related legal matters.",
-        "shortDescription": "Strong representation in property disputes and real estate litigation."
+        "shortDescription": "Strong representation in property disputes and real estate litigation.",
+        "pageTitle": "Property Litigation Services",
+        "forNriTitle": "For Non-Resident Indians",
+        "forNriDescription": "Property litigation for NRIs involves unique complexities:",
+        "forNriPoints": {
+          "point1": "Protecting property rights from a distance",
+          "point2": "Dealing with encroachments and illegal possession",
+          "point3": "Understanding local property laws and regulations",
+          "point4": "Managing litigation timelines and court appearances",
+          "point5": "Coordinating with local authorities and courts"
+        },
+        "processTitle": "Our Process",
+        "processSteps": {
+          "step1Title": "Case Evaluation",
+          "step1Description": "We thoroughly evaluate your property dispute, review all documents, and assess the strength of your case to determine the best legal strategy.",
+          "step2Title": "Legal Documentation",
+          "step2Description": "We prepare and file all necessary legal documents, including suits, petitions, and responses, ensuring compliance with all procedural requirements.",
+          "step3Title": "Court Representation",
+          "step3Description": "We represent you in all court proceedings, hearings, and negotiations, ensuring your interests are vigorously defended.",
+          "step4Title": "Regular Updates",
+          "step4Description": "We provide regular updates on case progress via email and scheduled calls, keeping you informed without requiring frequent travel."
+        },
+        "faqTitle": "Frequently Asked Questions",
+        "faqs": {
+          "q1": "What types of property disputes can you handle?",
+          "a1": "We handle various property disputes including title disputes, boundary issues, encroachments, eviction matters, and recovery of possession cases.",
+          "q2": "Do I need to be present in India for court hearings?",
+          "a2": "In most cases, we can represent you without your physical presence. However, some situations may require your appearance, which we'll discuss during consultation.",
+          "q3": "How long does property litigation typically take?",
+          "a3": "Property litigation duration varies significantly based on case complexity. Simple matters may resolve in 6-12 months, while complex disputes can take 2-5 years. We provide realistic timelines during consultation."
+        },
+        "ctaTitle": "Facing a Property Dispute?",
+        "ctaDescription": "Get expert legal representation to protect your property rights.",
+        "ctaButton": "Book a Consultation"
       },
       "civilMatters": {
         "title": "Civil Matters",
         "description": "Experienced handling of various civil cases including contract disputes, recovery matters, and civil suits.",
-        "shortDescription": "Experienced handling of civil and criminal matters in High Court."
+        "shortDescription": "Experienced handling of civil and criminal matters in High Court.",
+        "pageTitle": "Civil Matters Legal Services",
+        "forNriTitle": "For Non-Resident Indians",
+        "forNriDescription": "NRIs often face civil legal challenges:",
+        "forNriPoints": {
+          "point1": "Contract disputes with Indian parties",
+          "point2": "Recovery of debts and financial matters",
+          "point3": "Business and commercial disputes",
+          "point4": "Consumer protection cases",
+          "point5": "Administrative and regulatory matters"
+        },
+        "processTitle": "Our Process",
+        "processSteps": {
+          "step1Title": "Case Analysis",
+          "step1Description": "We analyze your civil matter, review all relevant documents and contracts, and assess the legal merits of your case.",
+          "step2Title": "Strategy Development",
+          "step2Description": "We develop a comprehensive legal strategy tailored to your specific situation, whether it involves negotiation, mediation, or litigation.",
+          "step3Title": "Legal Representation",
+          "step3Description": "We represent you in all legal proceedings, negotiations, and court appearances, ensuring your interests are protected.",
+          "step4Title": "Resolution & Follow-up",
+          "step4Description": "We work towards favorable resolution and ensure proper execution of judgments or settlements, keeping you informed throughout."
+        },
+        "faqTitle": "Frequently Asked Questions",
+        "faqs": {
+          "q1": "What types of civil matters do you handle?",
+          "a1": "We handle various civil matters including contract disputes, recovery suits, specific performance cases, injunctions, and other civil litigation matters.",
+          "q2": "Can civil disputes be resolved without going to court?",
+          "a2": "Yes, many civil disputes can be resolved through negotiation, mediation, or settlement. We explore all options before proceeding to litigation.",
+          "q3": "How do you handle recovery matters for NRIs?",
+          "a3": "We file appropriate recovery suits, obtain necessary orders, and work towards execution of decrees, handling all local requirements on your behalf."
+        },
+        "ctaTitle": "Need Civil Legal Assistance?",
+        "ctaDescription": "Book a consultation to discuss your civil matter and explore your legal options.",
+        "ctaButton": "Book a Consultation"
       },
       "criminalMatters": {
         "title": "Criminal Matters",
         "description": "Expert defense and representation in criminal cases, ensuring your rights are protected throughout the legal process.",
-        "shortDescription": "Experienced handling of civil and criminal matters in High Court."
+        "shortDescription": "Experienced handling of civil and criminal matters in High Court.",
+        "pageTitle": "Criminal Matters Legal Services",
+        "forNriTitle": "For Non-Resident Indians",
+        "forNriDescription": "Criminal matters for NRIs require specialized attention:",
+        "forNriPoints": {
+          "point1": "Understanding Indian criminal law and procedures",
+          "point2": "Managing cases while living abroad",
+          "point3": "Ensuring proper legal representation in court",
+          "point4": "Protecting your rights and interests",
+          "point5": "Coordinating with law enforcement and courts"
+        },
+        "processTitle": "Our Process",
+        "processSteps": {
+          "step1Title": "Case Assessment",
+          "step1Description": "We thoroughly assess your criminal case, review all charges and evidence, and develop a strong defense strategy.",
+          "step2Title": "Legal Defense",
+          "step2Description": "We prepare and present a robust defense, file necessary applications, and ensure all legal procedures are followed correctly.",
+          "step3Title": "Court Representation",
+          "step3Description": "We represent you in all court proceedings, hearings, and bail applications, ensuring your rights are protected at every stage.",
+          "step4Title": "Regular Communication",
+          "step4Description": "We maintain regular communication, providing updates on case progress and advising on all legal developments."
+        },
+        "faqTitle": "Frequently Asked Questions",
+        "faqs": {
+          "q1": "What types of criminal cases do you handle?",
+          "a1": "We handle various criminal matters including fraud, financial crimes, property offenses, and other criminal cases. We provide strong defense representation in all matters.",
+          "q2": "Do I need to be present in India for criminal proceedings?",
+          "a2": "Criminal cases often require your presence, especially for hearings and court appearances. However, we can handle many procedural matters on your behalf and minimize required travel.",
+          "q3": "How do you handle bail applications?",
+          "a3": "We prepare and file bail applications, present strong arguments, and work to secure bail when appropriate, ensuring all legal requirements are met."
+        },
+        "ctaTitle": "Need Criminal Defense?",
+        "ctaDescription": "Get expert legal representation to protect your rights and interests.",
+        "ctaButton": "Book a Consultation"
       },
       "needAssistanceTitle": "Need Legal Assistance?",
       "needAssistanceDescription": "Book a consultation to discuss your specific legal matter and get expert guidance tailored to your situation.",
-      "viewAllServices": "View All Services"
+      "viewAllServices": "View All Services",
+      "breadcrumbs": {
+        "home": "Home",
+        "services": "Services"
+      }
     },
     "credibility": {
       "yearsOfExperience": "Years of Experience",
@@ -134,7 +303,19 @@
       "noCaseStudiesFound": "No case studies found in this category.",
       "outcomeLabel": "Outcome:",
       "readCaseStudy": "Read Case Study",
-      "outcome": "Outcome"
+      "outcome": "Outcome",
+      "placeholders": {
+        "nriAncestralPropertySuccess": {
+          "title": "Successful Resolution of NRI Ancestral Property Dispute",
+          "excerpt": "An NRI client from the USA successfully resolved a complex ancestral property dispute involving multiple heirs and property partitions.",
+          "outcome": "Property successfully partitioned and client received their rightful share"
+        },
+        "mutualConsentDivorceNri": {
+          "title": "Smooth Mutual Consent Divorce for NRI Couple",
+          "excerpt": "Facilitated a mutual consent divorce for an NRI couple living in the UK, handling all legal procedures remotely.",
+          "outcome": "Divorce finalized within 6 months with fair settlement agreement"
+        }
+      }
     },
     "articles": {
       "sectionTitle": "Recent Articles",
@@ -146,6 +327,26 @@
       "allCategories": "All Categories",
       "noPostsFound": "No blog posts found in this category.",
       "readMoreLabel": "Read More",
-      "minRead": "min read"
+      "minRead": "min read",
+      "placeholders": {
+        "nriPropertyGuide": {
+          "title": "The NRI Guide to Ancestral Property Laws in India",
+          "excerpt": "Understanding the complexities of ancestral property rights and how NRIs can protect their interests."
+        },
+        "divorceProcedureNri": {
+          "title": "Navigating Divorce in India from Abroad",
+          "excerpt": "A comprehensive guide to mutual consent divorce procedures for NRIs living outside India."
+        },
+        "propertyLitigationTips": {
+          "title": "5 Common Pitfalls for NRIs in Property Disputes",
+          "excerpt": "Learn about the most common mistakes NRIs make in property litigation and how to avoid them."
+        }
+      },
+      "categories": {
+        "propertyLaw": "Property Law",
+        "familyLaw": "Family Law",
+        "civilLaw": "Civil Law",
+        "criminalLaw": "Criminal Law"
+      }
     }
 }

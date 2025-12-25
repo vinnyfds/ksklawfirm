@@ -54,9 +54,13 @@ function extractCategory(title: string, content: string): string {
 /**
  * GET /api/case-studies
  * Fetches all case studies, optionally filtered by category
+ * @param locale - Optional locale parameter for future multi-language support
  */
 export async function GET(request: NextRequest) {
   try {
+    const searchParams = request.nextUrl.searchParams;
+    const locale = searchParams.get('locale') || 'en'; // Accept locale for future use
+    
     const caseStudies = await prisma.content.findMany({
       where: {
         type: 'CASE_STUDY',

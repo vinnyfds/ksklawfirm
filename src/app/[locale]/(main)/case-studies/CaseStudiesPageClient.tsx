@@ -4,28 +4,9 @@ import { useTranslations } from 'next-intl';
 import { CaseStudyCard } from '@/components/sections/CaseStudyCard';
 import { Select } from '@/components/ui/Select';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-const placeholderCaseStudies = [
-  {
-    slug: 'nri-ancestral-property-success',
-    title: 'Successful Resolution of NRI Ancestral Property Dispute',
-    excerpt:
-      'An NRI client from the USA successfully resolved a complex ancestral property dispute involving multiple heirs and property partitions.',
-    category: 'Ancestral Properties',
-    outcome: 'Property successfully partitioned and client received their rightful share',
-    publishedAt: '2024-01-15',
-  },
-  {
-    slug: 'mutual-consent-divorce-nri',
-    title: 'Smooth Mutual Consent Divorce for NRI Couple',
-    excerpt:
-      'Facilitated a mutual consent divorce for an NRI couple living in the UK, handling all legal procedures remotely.',
-    category: 'Divorce',
-    outcome: 'Divorce finalized within 6 months with fair settlement agreement',
-    publishedAt: '2024-01-10',
-  },
-];
+// Placeholder case studies will be created using translations
 
 type CaseStudiesPageClientProps = {
   locale: string;
@@ -35,10 +16,37 @@ export function CaseStudiesPageClient({ locale }: CaseStudiesPageClientProps) {
   const t = useTranslations('caseStudies');
   const tNav = useTranslations('nav');
   const tServices = useTranslations('services');
+  const tCommon = useTranslations('common');
+  
+  // Create placeholder case studies with translations (memoized based on locale)
+  const placeholderCaseStudies = useMemo(() => [
+    {
+      slug: 'nri-ancestral-property-success',
+      title: t('placeholders.nriAncestralPropertySuccess.title'),
+      excerpt: t('placeholders.nriAncestralPropertySuccess.excerpt'),
+      category: 'Ancestral Properties',
+      outcome: t('placeholders.nriAncestralPropertySuccess.outcome'),
+      publishedAt: '2024-01-15',
+    },
+    {
+      slug: 'mutual-consent-divorce-nri',
+      title: t('placeholders.mutualConsentDivorceNri.title'),
+      excerpt: t('placeholders.mutualConsentDivorceNri.excerpt'),
+      category: 'Divorce',
+      outcome: t('placeholders.mutualConsentDivorceNri.outcome'),
+      publishedAt: '2024-01-10',
+    },
+  ], [t, locale]);
   
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [caseStudies, setCaseStudies] = useState(placeholderCaseStudies);
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Reset state and update placeholders when locale changes
+  useEffect(() => {
+    setSelectedCategory('all');
+    setCaseStudies(placeholderCaseStudies);
+  }, [locale, placeholderCaseStudies]);
   
   // Category mapping: English category name -> translation key
   const categoryMap: Record<string, string> = {
@@ -54,18 +62,23 @@ export function CaseStudiesPageClient({ locale }: CaseStudiesPageClientProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('/api/case-studies')
+    fetch(`/api/case-studies?locale=${locale}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data.caseStudies.length > 0) {
           setCaseStudies(data.data.caseStudies);
+        } else {
+          // Fallback to translated placeholders if no data from API
+          setCaseStudies(placeholderCaseStudies);
         }
       })
       .catch((err) => {
         console.error('Error fetching case studies:', err);
+        // Fallback to translated placeholders on error
+        setCaseStudies(placeholderCaseStudies);
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [locale, placeholderCaseStudies]);
 
   const filteredCaseStudies =
     selectedCategory === 'all'

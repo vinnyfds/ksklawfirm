@@ -5,37 +5,9 @@ import { Link } from '@/lib/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-const placeholderPosts = [
-  {
-    slug: 'nri-property-guide',
-    title: 'The NRI Guide to Ancestral Property Laws in India',
-    excerpt:
-      'Understanding the complexities of ancestral property rights and how NRIs can protect their interests.',
-    category: 'Property Law',
-    publishedAt: '2024-01-15',
-    readingTime: '5 min read',
-  },
-  {
-    slug: 'divorce-procedure-nri',
-    title: 'Navigating Divorce in India from Abroad',
-    excerpt:
-      'A comprehensive guide to mutual consent divorce procedures for NRIs living outside India.',
-    category: 'Family Law',
-    publishedAt: '2024-01-10',
-    readingTime: '7 min read',
-  },
-  {
-    slug: 'property-litigation-tips',
-    title: '5 Common Pitfalls for NRIs in Property Disputes',
-    excerpt:
-      'Learn about the most common mistakes NRIs make in property litigation and how to avoid them.',
-    category: 'Property Law',
-    publishedAt: '2024-01-05',
-    readingTime: '4 min read',
-  },
-];
+// Placeholder posts will be created using translations
 
 type BlogPageClientProps = {
   locale: string;
@@ -45,25 +17,72 @@ export function BlogPageClient({ locale }: BlogPageClientProps) {
   const t = useTranslations('articles');
   const tNav = useTranslations('nav');
   
+  // Create placeholder posts with translations (memoized based on locale)
+  const placeholderPosts = useMemo(() => [
+    {
+      slug: 'nri-property-guide',
+      title: t('placeholders.nriPropertyGuide.title'),
+      excerpt: t('placeholders.nriPropertyGuide.excerpt'),
+      category: 'Property Law',
+      publishedAt: '2024-01-15',
+      readingTime: '5 min read',
+    },
+    {
+      slug: 'divorce-procedure-nri',
+      title: t('placeholders.divorceProcedureNri.title'),
+      excerpt: t('placeholders.divorceProcedureNri.excerpt'),
+      category: 'Family Law',
+      publishedAt: '2024-01-10',
+      readingTime: '7 min read',
+    },
+    {
+      slug: 'property-litigation-tips',
+      title: t('placeholders.propertyLitigationTips.title'),
+      excerpt: t('placeholders.propertyLitigationTips.excerpt'),
+      category: 'Property Law',
+      publishedAt: '2024-01-05',
+      readingTime: '4 min read',
+    },
+  ], [t, locale]);
+  
+  // Category mapping for translations (memoized based on locale)
+  const categoryTranslationMap: Record<string, string> = useMemo(() => ({
+    'Property Law': t('categories.propertyLaw'),
+    'Family Law': t('categories.familyLaw'),
+    'Civil Law': t('categories.civilLaw'),
+    'Criminal Law': t('categories.criminalLaw'),
+  }), [t, locale]);
+  
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [posts, setPosts] = useState(placeholderPosts);
   const [isLoading, setIsLoading] = useState(false);
   const categories = ['all', 'Property Law', 'Family Law', 'Civil Law', 'Criminal Law'];
+  
+  // Reset state and update placeholders when locale changes
+  useEffect(() => {
+    setSelectedCategory('all');
+    setPosts(placeholderPosts);
+  }, [locale, placeholderPosts]);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('/api/blog')
+    fetch(`/api/blog?locale=${locale}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data.posts.length > 0) {
           setPosts(data.data.posts);
+        } else {
+          // Fallback to translated placeholders if no data from API
+          setPosts(placeholderPosts);
         }
       })
       .catch((err) => {
         console.error('Error fetching blog posts:', err);
+        // Fallback to translated placeholders on error
+        setPosts(placeholderPosts);
       })
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [locale, placeholderPosts]);
 
   const filteredPosts =
     selectedCategory === 'all'
@@ -94,7 +113,7 @@ export function BlogPageClient({ locale }: BlogPageClientProps) {
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
-                {cat === 'all' ? t('allCategories') : cat}
+                {cat === 'all' ? t('allCategories') : categoryTranslationMap[cat] || cat}
               </option>
             ))}
           </Select>
@@ -113,7 +132,7 @@ export function BlogPageClient({ locale }: BlogPageClientProps) {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-body-sm text-brand-secondary font-medium">
-                      {post.category}
+                      {categoryTranslationMap[post.category] || post.category}
                     </span>
                     <span className="text-body-sm text-text-secondary dark:text-dark-text-secondary">
                       {post.readingTime}
