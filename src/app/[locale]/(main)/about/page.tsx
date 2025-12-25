@@ -2,12 +2,30 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/lib/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
-export default async function AboutPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ locale: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'About Kalanidhi Sanjeeva Kumar | High Court Advocate',
+      description:
+        'Meet Kalanidhi Sanjeeva Kumar, High Court Advocate with 20 years of experience specializing in NRI legal matters, ancestral properties, divorce, and property litigations.',
+      canonical: `${baseUrl}/${locale}/about`,
+      locale,
+    },
+    baseUrl
+  );
+}
+
+export default async function AboutPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 

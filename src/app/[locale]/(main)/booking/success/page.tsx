@@ -1,8 +1,32 @@
 import { Link } from '@/lib/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
-export default function BookingSuccessPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'Booking Successful | KSK Law Firm',
+      description:
+        'Your consultation booking has been confirmed. You will receive a confirmation email shortly with all the details.',
+      canonical: `${baseUrl}/${locale}/booking/success`,
+      locale,
+      noindex: true, // Don't index success pages
+    },
+    baseUrl
+  );
+}
+
+export default async function BookingSuccessPage({ params }: Props) {
+  const { locale } = await params;
   return (
     <div className="container mx-auto px-4 py-12 md:py-16">
       <div className="max-w-2xl mx-auto text-center">

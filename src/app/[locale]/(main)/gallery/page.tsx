@@ -1,7 +1,30 @@
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { GallerySection } from '@/components/sections/GallerySection';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
-export default function GalleryPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'Office Gallery | KSK Law Firm',
+      description:
+        'Explore our office space and professional environment where we serve our NRI clients with dedication and expertise.',
+      canonical: `${baseUrl}/${locale}/gallery`,
+      locale,
+    },
+    baseUrl
+  );
+}
+
+export default async function GalleryPage({ params }: Props) {
+  const { locale } = await params;
   const breadcrumbs = [
     { label: 'Home', href: '/' },
     { label: 'Gallery', href: '/gallery' },

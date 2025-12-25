@@ -2,8 +2,46 @@ import { Link } from '@/lib/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { generateLegalServiceSchema } from '@/lib/schema';
+import { SchemaScript } from '@/components/seo/SchemaScript';
+import { Metadata } from 'next';
 
-export default function CriminalMattersPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'Criminal Matters Legal Services for NRIs | KSK Law Firm',
+      description:
+        'Expert defense and representation in criminal cases for NRIs. Ensuring your rights are protected throughout the legal process. High Court Advocate.',
+      canonical: `${baseUrl}/${locale}/services/criminal-matters`,
+      locale,
+    },
+    baseUrl
+  );
+}
+
+export default async function CriminalMattersPage({ params }: Props) {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  const schema = generateLegalServiceSchema({
+    name: 'Criminal Matters Legal Services',
+    description:
+      'Expert defense and representation in criminal cases, ensuring your rights are protected throughout the legal process.',
+    serviceType: 'Legal Service',
+    areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
+    provider: {
+      name: 'KSK Law Firm',
+      url: baseUrl,
+    },
+  });
   const breadcrumbs = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
@@ -11,9 +49,11 @@ export default function CriminalMattersPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-16">
-      <div className="max-w-4xl mx-auto">
-        <Breadcrumbs items={breadcrumbs} />
+    <>
+      <SchemaScript schema={schema} />
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="max-w-4xl mx-auto">
+          <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
           Criminal Matters Legal Services
         </h1>
@@ -148,7 +188,8 @@ export default function CriminalMattersPage() {
             <Link href="/booking">Book a Consultation</Link>
           </Button>
         </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

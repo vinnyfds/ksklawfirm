@@ -2,8 +2,46 @@ import { Link } from '@/lib/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { generateLegalServiceSchema } from '@/lib/schema';
+import { SchemaScript } from '@/components/seo/SchemaScript';
+import { Metadata } from 'next';
 
-export default function PropertyLitigationPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'Property Litigation Services for NRIs | KSK Law Firm',
+      description:
+        'Strong representation in property disputes, real estate litigation, and land-related legal matters for NRIs. Expert High Court Advocate.',
+      canonical: `${baseUrl}/${locale}/services/property-litigation`,
+      locale,
+    },
+    baseUrl
+  );
+}
+
+export default async function PropertyLitigationPage({ params }: Props) {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  const schema = generateLegalServiceSchema({
+    name: 'Property Litigation Services',
+    description:
+      'Strong representation in property disputes, real estate litigation, and land-related legal matters for NRIs.',
+    serviceType: 'Legal Service',
+    areaServed: ['India', 'USA', 'United Kingdom', 'UAE', 'Canada', 'Australia'],
+    provider: {
+      name: 'KSK Law Firm',
+      url: baseUrl,
+    },
+  });
   const breadcrumbs = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
@@ -11,9 +49,11 @@ export default function PropertyLitigationPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-16">
-      <div className="max-w-4xl mx-auto">
-        <Breadcrumbs items={breadcrumbs} />
+    <>
+      <SchemaScript schema={schema} />
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="max-w-4xl mx-auto">
+          <Breadcrumbs items={breadcrumbs} />
         <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4">
           Property Litigation Services
         </h1>
@@ -147,7 +187,8 @@ export default function PropertyLitigationPage() {
             <Link href="/booking">Book a Consultation</Link>
           </Button>
         </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

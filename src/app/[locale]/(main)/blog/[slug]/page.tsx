@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { prisma } from '@/lib/db';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
 type Props = {
   params: Promise<{
@@ -44,11 +46,42 @@ async function getBlogPost(slug: string, minReadText: string) {
       category: 'Legal', // Default category
       publishedAt: post.publishedAt?.toISOString() || post.createdAt.toISOString(),
       readingTime: calculateReadingTime(post.content, minReadText),
+      excerpt: post.content.replace(/<[^>]*>/g, '').substring(0, 160),
     };
   } catch (error) {
     console.error('Error fetching blog post:', error);
     return null;
   }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const baseUrl = getBaseUrl();
+  const t = await getTranslations('articles');
+  const post = await getBlogPost(slug, t('minRead'));
+
+  if (!post) {
+    return generateSEOMetadata(
+      {
+        title: 'Blog Post | KSK Law Firm',
+        description: 'Read our latest legal insights for NRIs.',
+        canonical: `${baseUrl}/${locale}/blog/${slug}`,
+        locale,
+      },
+      baseUrl
+    );
+  }
+
+  return generateSEOMetadata(
+    {
+      title: `${post.title} | KSK Law Firm Blog`,
+      description: post.excerpt || 'Read our latest legal insights for NRIs.',
+      canonical: `${baseUrl}/${locale}/blog/${post.slug}`,
+      locale,
+      ogType: 'article',
+    },
+    baseUrl
+  );
 }
 
 export default async function BlogPostPage({ params }: Props) {

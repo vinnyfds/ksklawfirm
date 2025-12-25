@@ -5,6 +5,8 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { prisma } from '@/lib/db';
 import { Link } from '@/lib/navigation';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
 type Props = {
   params: Promise<{
@@ -48,11 +50,41 @@ async function getCaseStudy(slug: string) {
       category: 'Legal', // Default category
       outcome: extractOutcome(caseStudy.content) || 'Case successfully resolved',
       publishedAt: caseStudy.publishedAt?.toISOString() || caseStudy.createdAt.toISOString(),
+      excerpt: caseStudy.content.replace(/<[^>]*>/g, '').substring(0, 160),
     };
   } catch (error) {
     console.error('Error fetching case study:', error);
     return null;
   }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const baseUrl = getBaseUrl();
+  const caseStudy = await getCaseStudy(slug);
+
+  if (!caseStudy) {
+    return generateSEOMetadata(
+      {
+        title: 'Case Study | KSK Law Firm',
+        description: 'Read about our successful legal cases for NRIs.',
+        canonical: `${baseUrl}/${locale}/case-studies/${slug}`,
+        locale,
+      },
+      baseUrl
+    );
+  }
+
+  return generateSEOMetadata(
+    {
+      title: `${caseStudy.title} | KSK Law Firm Case Study`,
+      description: caseStudy.excerpt || 'Read about our successful legal cases for NRIs.',
+      canonical: `${baseUrl}/${locale}/case-studies/${caseStudy.slug}`,
+      locale,
+      ogType: 'article',
+    },
+    baseUrl
+  );
 }
 
 export default async function CaseStudyPage({ params }: Props) {

@@ -1,88 +1,29 @@
-'use client';
+import { getTranslations } from 'next-intl/server';
+import { TestimonialsPageClient } from './TestimonialsPageClient';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
-import { useTranslations } from 'next-intl';
-import { useState, useEffect } from 'react';
-import { TestimonialCard } from '@/components/sections/TestimonialCard';
-import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-
-type Testimonial = {
-  id: string;
-  quote: string;
-  clientName: string;
-  location: string;
-  rating?: number;
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function TestimonialsPage() {
-  const t = useTranslations('testimonials');
-  const tNav = useTranslations('nav');
-  
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
 
-  useEffect(() => {
-    fetch('/api/testimonials')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          setTestimonials(data.data.testimonials);
-        } else {
-          setError(t('error'));
-        }
-      })
-      .catch((err) => {
-        console.error('Error fetching testimonials:', err);
-        setError(t('error'));
-      })
-      .finally(() => setIsLoading(false));
-  }, [t]);
-
-  const breadcrumbs = [
-    { label: tNav('home'), href: '/' },
-    { label: t('pageTitle'), href: '/testimonials' },
-  ];
-
-  return (
-    <div className="container mx-auto px-4 py-12 md:py-16">
-      <div className="max-w-6xl mx-auto">
-        <Breadcrumbs items={breadcrumbs} />
-        
-        <h1 className="text-h1 font-serif font-bold text-brand-primary mb-4 text-center mt-8">
-          {t('pageTitle')}
-        </h1>
-        <p className="text-body-lg text-text-secondary dark:text-dark-text-secondary text-center mb-12 max-w-2xl mx-auto">
-          {t('pageDescription')}
-        </p>
-
-        {isLoading && (
-          <div className="text-center py-12">
-            <p className="text-text-secondary dark:text-dark-text-secondary">{t('loading')}</p>
-          </div>
-        )}
-
-        {error && (
-          <div className="text-center py-12">
-            <p className="text-feedback-error">{error}</p>
-          </div>
-        )}
-
-        {!isLoading && !error && testimonials.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-text-secondary dark:text-dark-text-secondary">
-              {t('noTestimonials')}
-            </p>
-          </div>
-        )}
-
-        {!isLoading && !error && testimonials.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
+  return generateSEOMetadata(
+    {
+      title: 'Client Testimonials | NRI Legal Services | KSK Law Firm',
+      description:
+        'Read what our clients have to say about their experience working with us. Trusted by Non-Resident Indians worldwide for reliable, professional legal services.',
+      canonical: `${baseUrl}/${locale}/testimonials`,
+      locale,
+    },
+    baseUrl
   );
+}
+
+export default async function TestimonialsPage({ params }: Props) {
+  const { locale } = await params;
+  return <TestimonialsPageClient locale={locale} />;
 }

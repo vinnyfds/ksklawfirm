@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import { Inter, Merriweather } from 'next/font/google';
 import Script from 'next/script';
+import { CookieConsent } from '@/components/layout/CookieConsent';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,8 +45,9 @@ export default async function LocaleLayout({
           src="https://checkout.razorpay.com/v1/checkout.js"
           strategy="lazyOnload"
         />
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
+          <CookieConsent />
         </NextIntlClientProvider>
       </body>
     </html>

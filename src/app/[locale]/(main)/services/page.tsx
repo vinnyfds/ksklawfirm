@@ -2,12 +2,30 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/lib/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
-export default async function ServicesPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ locale: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'Legal Services for NRIs | KSK Law Firm',
+      description:
+        'Comprehensive legal services tailored specifically for Non-Resident Indians. Specializing in ancestral properties, divorce, property litigations, and civil/criminal matters.',
+      canonical: `${baseUrl}/${locale}/services`,
+      locale,
+    },
+    baseUrl
+  );
+}
+
+export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 

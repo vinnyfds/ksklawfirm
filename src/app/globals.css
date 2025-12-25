@@ -23,6 +23,27 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Merriweather', serif;
   }
+
+  /* Focus styles for keyboard navigation - WCAG 2.4.7 */
+  :focus-visible {
+    outline: 3px solid #2980B9;
+    outline-offset: 2px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.25);
+  }
+
+  /* Ensure focus is visible for all interactive elements */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid #2980B9;
+    outline-offset: 2px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.25);
+  }
 }
 
 @layer utilities {

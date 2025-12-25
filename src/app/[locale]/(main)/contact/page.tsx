@@ -1,7 +1,30 @@
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Card, CardContent } from '@/components/ui/Card';
+import { generateSEOMetadata, getBaseUrl } from '@/lib/seo';
+import { Metadata } from 'next';
 
-export default function ContactPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = getBaseUrl();
+
+  return generateSEOMetadata(
+    {
+      title: 'Contact Us | KSK Law Firm | NRI Legal Services',
+      description:
+        'Get in touch with KSK Law Firm for expert legal services. Contact High Court Advocate Kalanidhi Sanjeeva Kumar for NRI legal matters.',
+      canonical: `${baseUrl}/${locale}/contact`,
+      locale,
+    },
+    baseUrl
+  );
+}
+
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params;
   return (
     <div className="container mx-auto px-4 py-12 md:py-16">
       <div className="max-w-4xl mx-auto">

@@ -57,7 +57,7 @@ export function ServicesSection() {
                   href={service.href}
                   className="text-brand-secondary hover:text-brand-accent transition-colors font-medium text-body-sm"
                 >
-                  {tCommon('learnMore')} →
+                  Explore {service.title} Services →
                 </Link>
               </CardContent>
             </Card>
